@@ -1,31 +1,48 @@
 import { userArr, User, lists, input, setUserArr} from "./user.js"
+import StorageX from "./storagex.js"
 export let a = userArr
 
 export let arrItems: HTMLElement[] = []
+let arrUsers: HTMLElement[] = []
 
-export class LoginUi{
+export class LoginUi {
 
     static displayData(): any{
         a = userArr
 
         let displayData = a.map((item, index) => `
         <div class="users">
-            <p>${item.name}</p>
+            <div>
+                <p class="user-item">${item.name}</p>
+            </div>
             <span class = "remove">🗑️</span>
         </div>
         `);
         lists.innerHTML = (displayData).join(" ");
 
+        //This array will help us delete de user profiles
         arrItems = Array.from(document.querySelectorAll('.users .remove'))
-        console.log(arrItems);
+        //This array will help us to give the information to the users
+        arrUsers = Array.from(document.querySelectorAll('.user-item'))
 
+        //Adding event listener to delete user
         arrItems.forEach(e => {
             e.addEventListener('click', () => {
                 const index = arrItems.indexOf(e)
-                console.log(index)
                 this.removeArrayUser(index)
                 this.removeUser(e.parentElement)
-                
+            })
+        })
+
+        //Adding event listener to the user profiles
+        arrUsers.forEach(user => {
+            user.addEventListener('click', () => {
+                const storage = StorageX.getStorage()
+                const selectedUser = StorageX.getUser(storage, user)
+                //Adding selected user
+                StorageX.addCurrentUser(selectedUser)
+                // Redirect to another HTML file
+                window.location.href = 'http://127.0.0.1:5500/PelisND/movies.html'
             })
         })
     }
