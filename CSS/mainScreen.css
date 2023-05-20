@@ -10,11 +10,56 @@ body {
 
 .container {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
+.form {
+    width: 100%;
+    max-width: 300px;
+    background: rgba(255,255,255,0.2);
+    display:flex;
+    align-items: center;
+    border-radius: 60px;
+    padding: 10px 20px;
+    backdrop-filter: blur(4px)saturare(180%);
+}
+
+.form input{
+    background: transparent;
+    width: 60%;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 24px 10px;
+    font-size:20px;
+    color: #cac7ff;
+}
+
+.form button img{
+    width: 25px;
+
+}
+.form button{
+    border:0;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background: #58629b;
+    cursor: pointer;
+}
+
+.lists{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    float: left;
+    max-height: 70vh;
+    overflow-y: auto; 
+}
 .users {
+    min-width: 100px;
+    min-height: 100px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -22,8 +67,8 @@ body {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    margin: 50px;
-    font-size: 32px;
+    margin: 40px;
+    font-size: 80%;
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
@@ -31,36 +76,44 @@ body {
 }
 
 .users:nth-child(odd) {
-    background-color: lightblue;
+    background-color: #5FD8D6;
 }
 
 .users:nth-child(even) {
-    background-color: lightcoral;
+    background-color: #A723EE;
 }
 
 .users:hover {
     opacity: 0.5;
 }
-
-.users::after {
-    content: attr(data-name);
+.remove{
     position: absolute;
-    bottom: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 5px 10px;
-    font-size: 14px;
-    font-weight: normal;
-    border-radius: 4px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transform: translateY(90%);
 }
 
-.users:hover::after {
-    opacity: 1;
-    visibility: visible;
-}
+/* Styles for the scroll bar */
 
+/* width */
+::-webkit-scrollbar {
+    background-color: #000;
+    width: 12px;
+    border-radius: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(.5, #a520ca), color-stop(1, #2681cc));
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }}
+  

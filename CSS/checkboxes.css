@@ -1,0 +1,115 @@
+.checkbox-wrapper-24 {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 60%;
+    height: 50%;
+}
+  
+  .checkbox-wrapper-24 .checkbox {
+    display: table-cell;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    text-align: center;
+  }
+  
+  .checkbox-wrapper-24 label {
+    margin-bottom: 20px;
+    font-size: 20px;
+    display: inline-block;
+    color: white;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .checkbox-wrapper-24 label span {
+    display: inline-block;
+    position: relative;
+    background-color: transparent;
+    width: 45px;
+    height: 45px;
+    transform-origin: center;
+    border: 2px solid #333;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 10px;
+    transition: background-color 150ms 200ms, transform 350ms cubic-bezier(0.78, -1.22, 0.17, 1.89);
+  }
+  
+  .checkbox-wrapper-24 label span:before {
+    content: "";
+    width: 0px;
+    height: 2px;
+    border-radius: 2px;
+    background: #333;
+    position: absolute;
+    transform: rotate(50deg);
+    top: 21px;
+    left: 15px;
+    transition: width 50ms ease 50ms;
+    transform-origin: 0% 0%;
+  }
+  
+  .checkbox-wrapper-24 label span:after {
+    content: "";
+    width: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: #333;
+    position: absolute;
+    transform: rotate(310deg);
+    top: 29px;
+    left: 18px;
+    transition: width 50ms ease;
+    transform-origin: 0% 0%;
+  }
+  
+  .checkbox-wrapper-24 label:hover span:before {
+    width: 10px;
+    transition: width 100ms ease;
+  }
+  
+  .checkbox-wrapper-24 label:hover span:after {
+    width: 20px;
+    transition: width 150ms ease 100ms;
+  }
+  
+  .checkbox-wrapper-24 input[type=checkbox] {
+    display: none;
+  }
+  
+  .checkbox-wrapper-24 input[type=checkbox]:checked + label span {
+    background-color: #333;
+    transform: scale(1.25);
+  }
+  
+  .checkbox-wrapper-24 input[type=checkbox]:checked + label span:after {
+    width: 20px;
+    background: #fff;
+    transition: width 150ms ease 100ms;
+  }
+  
+  .checkbox-wrapper-24 input[type=checkbox]:checked + label span:before {
+    width: 10px;
+    background: #fff;
+    transition: width 150ms ease 100ms;
+  }
+  
+  .checkbox-wrapper-24 input[type=checkbox]:checked + label:hover span {
+    background-color: #333;
+    transform: scale(1.25);
+  }
+  
+  .checkbox-wrapper-24 input[type=checkbox]:checked + label:hover span:after {
+    width: 20px;
+    background: #fff;
+    transition: width 150ms ease 100ms;
+  }
+  
+  .checkbox-wrapper-24 input[type=checkbox]:checked + label:hover span:before {
+    width: 10px;
+    background: #fff;
+    transition: width 150ms ease 100ms;
+  }
+  

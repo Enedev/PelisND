@@ -11,13 +11,20 @@ export function setUserArr(index) {
 }
 form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const id = Math.random() * 1000000;
-    const user = { id, name: input.value };
-    userArr.push(user);
-    LoginUi.displayData();
-    LoginUi.clearInput();
-    StorageX.addUserStorage(userArr);
-    console.log(userArr);
+    console.log(input.value);
+    if (input.value.length > 10 || input.value.length == 0) {
+        alert("Cabezipolla");
+        LoginUi.clearInput();
+    }
+    else {
+        const id = Math.random() * 1000000;
+        const user = { id, name: input.value };
+        userArr.push(user);
+        LoginUi.displayData();
+        LoginUi.clearInput();
+        StorageX.addUserStorage(userArr);
+        console.log(userArr);
+    }
 });
 export class User {
     constructor(id, name) {
