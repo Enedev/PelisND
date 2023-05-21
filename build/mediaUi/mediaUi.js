@@ -28,6 +28,19 @@ class MediaUi {
             media.appendChild(moviesContainer);
         }
     }
+    static displayMedia(movies) {
+        const media = document.querySelector('.media');
+        for (const movie in movies) {
+            let moviesContainer = document.createElement('div');
+            moviesContainer.innerHTML = `
+                <div>
+                    <img src='https://image.tmdb.org/t/p/w500${movies[movie].backdrop_path}'></img>
+                    <span>${movies[movie].title}</span>
+                </div>
+            `;
+            media.appendChild(moviesContainer);
+        }
+    }
 }
 const currentUser = MediaUi.getCurrentUser();
 const newUser = new User(currentUser.id, currentUser.name);
