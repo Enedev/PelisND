@@ -17,9 +17,7 @@ class MediaUi {
         userName.innerHTML = currentUser.name
         
         return currentUser.name ? currentUser : undefined;
-    }
-    
-        
+    }    
 
     static displayMedia(movies:any) {
         const media = document.querySelector('.media') as HTMLElement
@@ -31,21 +29,6 @@ class MediaUi {
                     <img src='https://image.tmdb.org/t/p/w500${movies[movie].backdrop_path}'></img>
                     <span>${movies[movie].title}</span>
                     <span>${movies[movie].id}</span>
-                </div>
-            `
-            media.appendChild(moviesContainer)
-        }
-    }
-
-    static displayMedia(movies:any) {
-        const media = document.querySelector('.media') as HTMLElement
-
-        for(const movie in movies) {
-            let moviesContainer = document.createElement('div')
-            moviesContainer.innerHTML = `
-                <div>
-                    <img src='https://image.tmdb.org/t/p/w500${movies[movie].backdrop_path}'></img>
-                    <span>${movies[movie].title}</span>
                 </div>
             `
             media.appendChild(moviesContainer)
