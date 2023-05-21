@@ -15,7 +15,7 @@ export class LoginUi {
             <div>
                 <p class="user-item">${item.name}</p>
             </div>
-            <span class = "remove"><img src="/img/biggertrash.png"></span>
+            <span class = "remove"><img src="./img/biggertrash.png"></span>
         </div>
         `);
         lists.innerHTML = (displayData).join(" ");
@@ -42,7 +42,7 @@ export class LoginUi {
                 //Adding selected user
                 StorageX.addCurrentUser(selectedUser)
                 // Redirect to another HTML file
-                window.location.href = 'http://127.0.0.1:5500/movies.html'
+                window.location.href = 'http://127.0.0.1:5500/PelisND/movies.html'
             })
         })
     }

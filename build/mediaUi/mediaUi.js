@@ -12,6 +12,19 @@ class MediaUi {
             [] : JSON.parse(localStorage.getItem('currentUser') || '{}');
         userName.innerHTML = currentUser.name;
     }
+    static displayMedia(movies) {
+        const media = document.querySelector('.media');
+        for (const movie in movies) {
+            let moviesContainer = document.createElement('div');
+            moviesContainer.innerHTML = `
+                <div>
+                    <img src='https://image.tmdb.org/t/p/w500${movies[movie].backdrop_path}'></img>
+                    <span>${movies[movie].title}</span>
+                </div>
+            `;
+            media.appendChild(moviesContainer);
+        }
+    }
 }
 MediaUi.getCurrentUser();
 export { MediaUi };

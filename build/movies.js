@@ -1,14 +1,51 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+import { MediaUi } from "./mediaUi/mediaUi.js";
+let genres;
+let arr = ['Thriller', 'Adventure'];
 export default class Movies {
     static getMovies() {
         fetch('https://api.themoviedb.org/3/movie/popular?api_key=f01475a6fe591a8726e11259c3a2e0b0&language=en-US&page=1')
-            .then(response => response.json())
-            .then(data => console.log(data, 'estas son las películas'));
+            .then(response => response.json());
+        /* .then(data => console.log(data, 'estas son las películas')); */
     }
     static getGenre() {
         fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=f01475a6fe591a8726e11259c3a2e0b0&language=en-US')
             .then(response => response.json())
-            .then(data => console.log(data, 'Estos son los géneros de las películas'));
+            .then(data => {
+            genres = data.genres;
+            console.log(genres, 'Estos son los géneros de las películas');
+        });
+    }
+    static getMovieByGenre(likes) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let id = '';
+            for (const genre in genres) {
+                if (likes.includes(genres[genre].name)) {
+                    id = genres[genre].id;
+                    try {
+                        const response = yield fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f01475a6fe591a8726e11259c3a2e0b0&language=en-US&page=1&with_genres=${id}`);
+                        const data = yield response.json();
+                        console.log(data.results, `Data for the ${genres[genre].name} genre`);
+                        MediaUi.displayMedia(data.results);
+                    }
+                    catch (error) {
+                        throw new Error(`Error: ${error}`);
+                    }
+                }
+            }
+        });
     }
 }
-console.log(Movies.getMovies(), 'Estas son las pelis');
-console.log(Movies.getGenre(), 'Estos son los géneros de las pelis');
+Movies.getMovies();
+Movies.getGenre();
+setTimeout(() => {
+    Movies.getMovieByGenre(arr);
+}, 2000);
