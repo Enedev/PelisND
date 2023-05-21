@@ -15,34 +15,38 @@
     <aside>
         <div class="typeButtons">
             <button>Tipos</button>
-            <button class="diffButton">Actores</button>
+            <button class="diffButton" id="searchButton">Actores</button>
+            <div id="searchContainer" style="display: none;">
+              <input type="text" id="searchInput" placeholder="Ingrese su búsqueda">
+              <button id="searchSubmit">Buscar</button>
+            </div>
         </div>
         <div class="checkbox-wrapper-24">
-            <input type="checkbox" id="check-24" name="check" value="" />
+            <input type="checkbox" id="check-24" name="check" value=""  class ="genre-checkbox"/>
             <label for="check-24">
               <span></span>Drama
             </label>
-            <input type="checkbox" id="check-25" name="check" value="" />
+            <input type="checkbox" id="check-25" name="check" value="" class ="genre-checkbox"/>
             <label for="check-25">
               <span></span>Action
             </label>
-            <input type="checkbox" id="check-26" name="check" value="" />
+            <input type="checkbox" id="check-26" name="check" value="" class ="genre-checkbox"/>
             <label for="check-26">
               <span></span>Animation
             </label>
-            <input type="checkbox" id="check-27" name="check" value="" />
+            <input type="checkbox" id="check-27" name="check" value="" class ="genre-checkbox" />
             <label for="check-27">
               <span></span>Comedy
             </label>
-            <input type="checkbox" id="check-28" name="check" value="" />
+            <input type="checkbox" id="check-28" name="check" value=""  class ="genre-checkbox"/>
             <label for="check-28">
               <span></span>Music
             </label>
-            <input type="checkbox" id="check-29" name="check" value="" />
+            <input type="checkbox" id="check-29" name="check" value=""  class ="genre-checkbox"/>
             <label for="check-29">
               <span></span>Thriller
             </label>
-            <input type="checkbox" id="check-30" name="check" value="" />
+            <input type="checkbox" id="check-30" name="check" value="" class ="genre-checkbox"/>
             <label for="check-30">
               <span></span>Science Fiction
             </label>    
@@ -52,12 +56,14 @@
         <div class="typeButtons">
             <button>Movies</button>
             <button class="diffButton">Series</button>
+            
         </div>
         <div class = "media">
 
         </div>
       </main>
-
+    
+    <script type = "module" src="./build/searcher.js"></script>
 
     <script type = "module" src="./build/movies.js"></script>
     <script type = "module" src="./build/series.js"></script>

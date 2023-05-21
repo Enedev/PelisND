@@ -1,8 +1,32 @@
-import { userArr, lists, input, setUserArr } from "./user.js";
+import { User, setUserArr } from "./user.js";
 import StorageX from "./storagex.js";
+export let userArr = StorageX.getStorage();
 export let a = userArr;
 export let arrItems = [];
 let arrUsers = [];
+//All of this is for the login ui
+const form = document.querySelector("[data-form]");
+const lists = document.querySelector("[data-lists]");
+const input = document.querySelector("[data-input]");
+if (form) {
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log(input.value);
+        if (input.value.length > 10 || input.value.length == 0) {
+            alert("Cabezipolla");
+            LoginUi.clearInput();
+        }
+        else {
+            const id = Math.random() * 1000000;
+            const user = new User(id, input.value);
+            userArr.push(user);
+            LoginUi.displayData();
+            LoginUi.clearInput();
+            StorageX.addUserStorage(userArr);
+            console.log(userArr);
+        }
+    });
+}
 export class LoginUi {
     static displayData() {
         a = userArr;
@@ -11,10 +35,12 @@ export class LoginUi {
             <div>
                 <p class="user-item">${item.name}</p>
             </div>
-            <span class = "remove"><img src="/img/biggertrash.png"></span>
+            <span class = "remove"><img src="./img/biggertrash.png"></span>
         </div>
         `);
-        lists.innerHTML = (displayData).join(" ");
+        if (lists) {
+            lists.innerHTML = (displayData).join(" ");
+        }
         //This array will help us delete de user profiles
         arrItems = Array.from(document.querySelectorAll('.users .remove'));
         //This array will help us to give the information to the users
@@ -59,3 +85,6 @@ export class LoginUi {
         setUserArr(index);
     }
 }
+window.addEventListener("DOMContentLoaded", () => {
+    LoginUi.displayData();
+});
