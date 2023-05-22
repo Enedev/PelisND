@@ -7,22 +7,48 @@
     <link rel="stylesheet" href="./CSS/mediaScreen.css">
     <link rel="stylesheet" href="./CSS/checkboxes.css">
     <link rel="stylesheet" href="./CSS/searcher.css">
-
-    <title>Document</title>
+    <link rel="stylesheet" href="CSS/loader.css">
+    <link rel="stylesheet" href="CSS/yearSearcher.css">
+    <title>PelisND</title>
 </head>
 <body>
+    <div id="loader" class="loader">
+      <div class="loader">
+          <div class="loader-box">
+              <div class="loader-nd"><span>
+              </span></div>
+              <div class="loader-nd"><span>
+              </span></div>
+              <div class="loader-nd"><i></i>
+              </div>
+              <div class="loader-nd"><i></i>
+              </div>
+          </div>
+      </div>
+      <!-- Contenido de la pantalla de carga -->
+  </div>
+  <div id="content" class="content" style="display: none;"> 
     <div class="nameBox"><span class="userName">name</span></div>
 
     <aside>
         <div class="typeButtons">
             <button>Tipos</button>
             <button class="diffButton" id="searchButton">Actores</button>
-            <div id="searchContainer" style="display: none;">
-              <input type="text" id="searchInput" placeholder="Actor Name">
-              <button id="searchSubmit"><img src="./img/search.png"></button></button>
-            </div>
+            <button id="yearButton">Año</button>
         </div>
-        <div class="checkbox-wrapper-24">
+        <div class="typeButtons" id="searcherDiv">
+          <div id="searchContainer" style="display: none;">
+            <div>
+              <input type="text" id="searchInput" placeholder="Actor Name">
+              <button id="searchSubmit"><img src="./img/searcher.png"></button></button>
+            </div>
+          </div>
+          <div id="yearSearchContainer" style="display: none;">
+            <input type="text" id="yearSearchInput" placeholder="Release Data">
+            <button id="yearSearchSubmit"><img src="./img/searcher.png"></button></button>
+          </div>
+        </div>
+        <div id="allCheckboxes" class="checkbox-wrapper-24">
             <input type="checkbox" id="check-24" name="check" value=""  class ="genre-checkbox"/>
             <label for="check-24">
               <span></span>Drama
@@ -63,6 +89,11 @@
 
         </div>
     </main>
+    </div>
+
+
+    <script type="module" src="build/yearSearcher.js"></script>
+    <script type="module" src="build/loginScreen.js"></script>
     <script type = "module" src="./build/checkboxes.js"></script>
     <script type = "module" src="./build/searcher.js"></script>
     <script type = "module" src="./build/movies.js"></script>

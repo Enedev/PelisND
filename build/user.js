@@ -6,8 +6,8 @@ export const lists = document.querySelector("[data-lists]");
 export const input = document.querySelector("[data-input]");
 export let userArr = StorageX.getStorage();
 export function setUserArr(index) {
-    userArr = userArr.filter(e => e !== userArr[index]);
-    StorageX.addUserStorage(userArr);
+    const newUsers = userArr.filter(e => e !== userArr[index]);
+    StorageX.addUserStorage(newUsers);
     LoginUi.displayData();
 }
 export class User {

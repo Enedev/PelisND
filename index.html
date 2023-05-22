@@ -5,20 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/mainScreen.css">
-    <title>Oop page</title>
+    <link rel="stylesheet" href="CSS/loader.css">
+    <link rel="stylesheet" href="CSS/title.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tangerine">
+
+    <title>PelisND</title>
 </head>
 <body>
-    <div class = "container">
-        <form class="form" data-form>
-            <input type="text" placeholder="User..." data-input>
-            <button class="btn"><img src="./img/mas.png"></button>
-        </form>
-        <div class="lists" data-lists>
-            
+    <div id="loader" class="loader">
+        <div class="loader">
+            <div class="loader-box">
+                <div class="loader-nd"><span>
+                </span></div>
+                <div class="loader-nd"><span>
+                </span></div>
+                <div class="loader-nd"><i></i>
+                </div>
+                <div class="loader-nd"><i></i>
+                </div>
+            </div>
+        </div>
+        <!-- Contenido de la pantalla de carga -->
+    </div>
+    
+        <!-- Resto del contenido -->
+    <div id="content" class="content hide-content" style="display: none;"> 
+        <div>
+            <h1>Pelis ND</h1>
+            <h1>Dani - Neit</h1>
+        </div>
+        <div class = "container">
+            <form class="form" data-form>
+                <input type="text" placeholder="User..." data-input>
+                <button class="btn"><img src="./img/mas.png"></button>
+            </form>
+            <div class="lists" data-lists>
+                
+            </div>
         </div>
     </div>
-
+    <script type="module" src="build/loginScreen.js"></script>
     <script type="module" src="build/loginUi.js"></script>
     <script type="module" src="build/user.js"></script>
+    
 </body>
 </html>

@@ -9,8 +9,9 @@ export const input = document.querySelector("[data-input]") as HTMLInputElement;
 export let userArr: User[] = StorageX.getStorage();
 
 export function setUserArr(index: number){
-    userArr = userArr.filter(e => e !== userArr[index]) 
-    StorageX.addUserStorage(userArr)
+    
+    const newUsers = userArr.filter(e => e !== userArr[index]) 
+    StorageX.addUserStorage(newUsers)
     LoginUi.displayData()
 }
 

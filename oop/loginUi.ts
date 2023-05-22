@@ -1,9 +1,6 @@
 import {  User, setUserArr} from "./user.js"
 import StorageX from "./storagex.js"
 
-export let userArr: User[] = StorageX.getStorage();
-export let a = userArr
-
 export let arrItems: HTMLElement[] = []
 let arrUsers: HTMLElement[] = []
 
@@ -14,6 +11,7 @@ const input = document.querySelector("[data-input]") as HTMLInputElement;
 
 if (form){
     form.addEventListener("submit", (e) => {
+        const userArr = StorageX.getStorage();
         e.preventDefault();
         console.log(input.value)
         if (input.value.length > 10 || input.value.length == 0){
@@ -21,12 +19,11 @@ if (form){
             LoginUi.clearInput();
         } else{
             const id = Math.random() * 1000000;
-            const user = new User( id, input.value);
+            const user = new User(id, input.value);
             userArr.push(user)
+            StorageX.addUserStorage(userArr);
             LoginUi.displayData();
             LoginUi.clearInput();
-            StorageX.addUserStorage(userArr);
-            console.log(userArr);
         }
         
     });
@@ -36,7 +33,7 @@ if (form){
 export class LoginUi {
 
     static displayData(): any{
-        a = userArr
+        const  a = StorageX.getStorage();
 
         let displayData = a.map((item, index) => `
         <div class="users">
@@ -59,8 +56,8 @@ export class LoginUi {
         arrItems.forEach(e => {
             e.addEventListener('click', () => {
                 const index = arrItems.indexOf(e)
-                this.removeArrayUser(index)
                 this.removeUser(e.parentElement)
+                this.removeArrayUser(index)
             })
         })
 
@@ -72,13 +69,15 @@ export class LoginUi {
                 //Adding selected user
                 StorageX.addCurrentUser(selectedUser)
                 // Redirect to another HTML file
-                window.location.href = 'http://127.0.0.1:5500/PelisND/movies.html'
+                window.location.href = 'http://127.0.0.1:5500/movies.html'
             })
         })
     }
     static removeUser(element: any){
-
-        element.innerHTML = ''
+        const parentElement = element.parentElement;
+        if (parentElement) {
+            parentElement.removeChild(element);
+        }
         /* lists.addEventListener("click", (e: MouseEvent) =>{
             if((e.target as Element).classList.contains("remove")){
                 (e.target as HTMLElement).parentElement?.remove();
@@ -97,7 +96,9 @@ export class LoginUi {
         input.value ="";
     }
     static removeArrayUser(index: number){
-        setUserArr(index)     
+        const userArr = StorageX.getStorage();
+        userArr.splice(index, 1);
+        StorageX.addUserStorage(userArr);   
     }
 }
 

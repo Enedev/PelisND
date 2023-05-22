@@ -1,5 +1,4 @@
-.typeButtons #searchSubmit  {
-    position: absolute;
+.typeButtons #yearSearchSubmit  {
     margin-top: 50px;
     width: 90%;
     height: 40px;
@@ -11,8 +10,8 @@
     backdrop-filter: blur(4px) saturate(180%);
 }   
 
-#searchContainer{
-    position: absolute;
+
+#yearSearchContainer {
     margin-top: 50px;
     width: 90%;
     height: 40px;
@@ -22,9 +21,9 @@
     border-radius: 30px;
     padding: 10px 20px;
     backdrop-filter:  blur(4px) saturate(180%);
-
 }
-#searchContainer input{
+
+#yearSearchContainer input{
     background: transparent;
     flex:1;
     border: 0;
@@ -35,7 +34,5 @@
     float: left;
 }
 
-::placeholder{
-    color:#cac7ff;
-}
+
 

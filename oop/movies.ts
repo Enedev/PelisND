@@ -59,6 +59,21 @@ export default class Movies {
         })
     }
 
+    static getMoviesByReleaseData(start_date: string, end_date: string) {
+        fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f01475a6fe591a8726e11259c3a2e0b0&primary_release_date.gte=${start_date}&primary_release_date.lte=${end_date}`)
+        
+        .then(response => response.json())
+        .then(data => {
+            const media2 = document.querySelector('.media') as HTMLElement
+            media2.innerHTML = ''
+            const yearMovies = data.results
+            console.log(yearMovies[0])
+            //Showin' data yearMovies
+            MediaUi.displayMedia(yearMovies)
+
+        })
+    }
+
 }
 
 //This will give us the genres we want to get
