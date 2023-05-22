@@ -1,4 +1,12 @@
 .checkbox-wrapper-24 {
+  visibility: hidden;
+}
+
+.checkbox-wrapper-24.show {
+  visibility: visible;
+}
+
+.checkbox-wrapper-24 {
     display: flex;
     flex-direction: column;
     margin-top: 20px;

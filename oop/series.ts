@@ -1,3 +1,6 @@
+import { MediaUi } from "./mediaUi/mediaUi.js";
+
+
 export class Series{
     
     static getSeries():any{
@@ -10,4 +13,6 @@ export class Series{
         .then(response => response.json())
         .then(data => console.log(data, 'estos son los géneros de las series'));
     }
+
+    
 }

@@ -1,15 +1,22 @@
-import Movies from "./movies.js";
+import Movies from "./movies";
 
-const searchActorButton = document.getElementById('searchButton') as HTMLButtonElement;
+const searchButton = document.getElementById('searchButton') as HTMLButtonElement;
 const searchContainer = document.getElementById('searchContainer') as HTMLElement;
-const searchBar = document.querySelector('#searchContainer #searchInput') as HTMLInputElement
+const searchSubmit = document.getElementById('searchSubmit') as HTMLButtonElement;
+const searchInput = document.getElementById('searchInput') as HTMLInputElement;
 
-const searchButton = document.querySelector('#searchContainer #searchSubmit') as HTMLButtonElement
 
 //shows the searchbar
-searchActorButton.addEventListener('click', () => {
+searchButton.addEventListener('click', () => {
   searchContainer.style.display = 'block';
-  console.log(searchButton)
+  searchButton.style.display = 'none';
+  searchInput.value = '';
+
+});
+
+searchSubmit.addEventListener('click', () => {
+  searchContainer.style.display = 'none';
+  searchButton.style.display = 'block';
 });
 
 //Tells me what the user is typing
@@ -18,9 +25,9 @@ searchActorButton.addEventListener('click', () => {
 }) */
 
 //Search the actors
-searchButton.addEventListener('click', () => {
-  if(searchBar.value.length > 0) {
-    const actorName = searchBar.value
+searchSubmit.addEventListener('click', () => {
+  if(searchSubmit.value.length > 0) {
+    const actorName = searchSubmit.value
     Movies.getMoviesByActorName(actorName.trim())
 
   } else {
