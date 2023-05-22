@@ -18,6 +18,9 @@ aside {
     
 }
 
+#searcherDiv{
+    height: 20vh;
+}
 .typeButtons {
     display: flex;
     flex-direction: row;
