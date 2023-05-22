@@ -43,6 +43,18 @@ export default class Movies {
             }
         });
     }
+    static getMoviesByActorName(name) {
+        fetch(`https://api.themoviedb.org/3/search/person?api_key=f01475a6fe591a8726e11259c3a2e0b0&language=en-US&query=${name}`)
+            .then(response => response.json())
+            .then(data => {
+            const media = document.querySelector('.media');
+            media.innerHTML = '';
+            const movies = data.results;
+            console.log(movies[0]);
+            //Showinf actor movies
+            MediaUi.displayMedia(movies[0].known_for);
+        });
+    }
 }
 Movies.getMovies();
 Movies.getGenre();

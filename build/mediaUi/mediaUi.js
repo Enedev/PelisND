@@ -33,14 +33,13 @@ const currentUser = MediaUi.getCurrentUser();
 const newUser = new User(currentUser.id, currentUser.name);
 // Obtener todos los elementos del checkbox de género
 const genreCheckboxes = Array.from(document.querySelectorAll('.genre-checkbox'));
-console.log(genreCheckboxes);
 // Agregar evento a los checkboxes
 for (const checkbox of genreCheckboxes) {
     checkbox.addEventListener('change', () => {
         var _a, _b;
         const genre = (_b = (_a = checkbox.nextElementSibling) === null || _a === void 0 ? void 0 : _a.textContent) === null || _b === void 0 ? void 0 : _b.trim();
         console.log('Genre:', genre);
-        if (genre && currentUser && checkbox.checked) {
+        if (genre) {
             newUser.setGenre(genre);
         }
     });

@@ -16,7 +16,7 @@ export function setUserArr(index: number){
 export class User{
     id: number;
     name: string;
-    selectedGenres?: string[];
+    selectedGenres!: string[];
 
     constructor(id:number, name:string){
         this.id = id;
@@ -25,10 +25,14 @@ export class User{
     }
 
     public setGenre(genre:string){  
-        if(this.selectedGenres) {
-            this.selectedGenres.push(genre);
+        //if the selectedGenres doesn't includes genre
+        if(!this.selectedGenres.includes(genre)) {
+            this.selectedGenres.push(genre)
+        } else {
+            const index = this.selectedGenres.indexOf(genre)
+            this.selectedGenres.splice(index, 1)
+            console.warn('Género eliminado')
         }
         console.log("Estos son los generos del Usuario", this.selectedGenres)
-
     }
 }
