@@ -1,4 +1,5 @@
 import { LoginUi } from "./loginUi.js";
+import Movies from "./movies.js";
 import StorageX from "./storagex.js";
 
 export const form = document.querySelector("[data-form]")  as HTMLFormElement;
@@ -33,6 +34,13 @@ export class User{
             this.selectedGenres.splice(index, 1)
             console.warn('Género eliminado')
         }
-        console.log("Estos son los generos del Usuario", this.selectedGenres)
+
+        StorageX.updateGenreLikes(this, this.selectedGenres)
+        if(this.selectedGenres.length > 0) {
+            Movies.getMovieByGenre(this.selectedGenres)
+        } else {
+            Movies.getMovies()
+        }
+        console.log("Estos son los generos del Usuario", this.selectedGenres.length)
     }
 }
