@@ -1,7 +1,5 @@
-import { User, setUserArr } from "./user.js";
+import { User } from "./user.js";
 import StorageX from "./storagex.js";
-export let userArr = StorageX.getStorage();
-export let a = userArr;
 export let arrItems = [];
 let arrUsers = [];
 //All of this is for the login ui
@@ -10,6 +8,7 @@ const lists = document.querySelector("[data-lists]");
 const input = document.querySelector("[data-input]");
 if (form) {
     form.addEventListener("submit", (e) => {
+        const userArr = StorageX.getStorage();
         e.preventDefault();
         console.log(input.value);
         if (input.value.length > 10 || input.value.length == 0) {
@@ -20,16 +19,15 @@ if (form) {
             const id = Math.random() * 1000000;
             const user = new User(id, input.value);
             userArr.push(user);
+            StorageX.addUserStorage(userArr);
             LoginUi.displayData();
             LoginUi.clearInput();
-            StorageX.addUserStorage(userArr);
-            console.log(userArr);
         }
     });
 }
 export class LoginUi {
     static displayData() {
-        a = userArr;
+        const a = StorageX.getStorage();
         let displayData = a.map((item, index) => `
         <div class="users">
             <div>
@@ -49,8 +47,8 @@ export class LoginUi {
         arrItems.forEach(e => {
             e.addEventListener('click', () => {
                 const index = arrItems.indexOf(e);
-                this.removeArrayUser(index);
                 this.removeUser(e.parentElement);
+                this.removeArrayUser(index);
             });
         });
         //Adding event listener to the user profiles
@@ -61,12 +59,15 @@ export class LoginUi {
                 //Adding selected user
                 StorageX.addCurrentUser(selectedUser);
                 // Redirect to another HTML file
-                window.location.href = 'http://127.0.0.1:5500/PelisND/movies.html';
+                window.location.href = 'http://127.0.0.1:5500/movies.html';
             });
         });
     }
     static removeUser(element) {
-        element.innerHTML = '';
+        const parentElement = element.parentElement;
+        if (parentElement) {
+            parentElement.removeChild(element);
+        }
         /* lists.addEventListener("click", (e: MouseEvent) =>{
             if((e.target as Element).classList.contains("remove")){
                 (e.target as HTMLElement).parentElement?.remove();
@@ -82,7 +83,9 @@ export class LoginUi {
         input.value = "";
     }
     static removeArrayUser(index) {
-        setUserArr(index);
+        const userArr = StorageX.getStorage();
+        userArr.splice(index, 1);
+        StorageX.addUserStorage(userArr);
     }
 }
 window.addEventListener("DOMContentLoaded", () => {

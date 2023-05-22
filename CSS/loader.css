@@ -1,0 +1,120 @@
+.loader{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, blue, purple);
+}
+
+.loader-box{
+    position: relative;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-reflect: below 0
+    linear-gradient(transparent,
+    transparent, #0005)
+}
+
+.loader-box .loader-nd{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    animation: animateLoading 2s linear
+    infinite;
+}
+
+.loader-box .loader-nd:nth-child(2),
+.loader-box .loader-nd:nth-child(4){
+    animation-delay: -1s;
+    filter: hue-rotate(290deg);
+}
+
+@keyframes animateLoading {
+    0%{
+        transform: rotate(0deg);
+    }
+
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+.loader-box .loader-nd:nth-child(1)::before,
+.loader-box .loader-nd:nth-child(2)::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to top,
+    transparent, rgba(215, 55, 255, 0.85));
+    background-size: 100px 180px;
+    background-repeat: no-repeat;
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+}
+
+.loader .loader-nd i{
+    position:absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: #eb02ebe6;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #eb02ebe6,
+    0 0 20px #eb02ebe6,
+    0 0 30px #eb02ebe6,
+    0 0 40px #eb02ebe6,
+    0 0 50px #eb02ebe6,
+    0 0 60px #eb02ebe6,
+    0 0 70px #eb02ebe6,
+    0 0 80px #eb02ebe6,
+    0 0 90px #eb02ebe6,
+    0 0 100px #eb02ebe6;
+    z-index: 10;
+}
+
+.loader-box .loader-nd span{
+    position: absolute;
+    inset: 20px;
+    background: #000;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+
+/*@keyframes loader{
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+.loader::after,
+.loader::before {
+    animation: loader 2s linear infinite;
+    content: '';
+    border: 2px solid #FFF;
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.loader::after {
+    opacity: 0;
+    animation-delay: 1s;
+}*/

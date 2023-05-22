@@ -7,10 +7,27 @@
     <link rel="stylesheet" href="./CSS/mediaScreen.css">
     <link rel="stylesheet" href="./CSS/checkboxes.css">
     <link rel="stylesheet" href="./CSS/searcher.css">
+    <link rel="stylesheet" href="CSS/loader.css">
 
     <title>Document</title>
 </head>
 <body>
+    <div id="loader" class="loader">
+      <div class="loader">
+          <div class="loader-box">
+              <div class="loader-nd"><span>
+              </span></div>
+              <div class="loader-nd"><span>
+              </span></div>
+              <div class="loader-nd"><i></i>
+              </div>
+              <div class="loader-nd"><i></i>
+              </div>
+          </div>
+      </div>
+      <!-- Contenido de la pantalla de carga -->
+  </div>
+  <div id="content" class="content" style="display: none;"> 
     <div class="nameBox"><span class="userName">name</span></div>
 
     <aside>
@@ -63,6 +80,9 @@
 
         </div>
     </main>
+    </div>
+
+    <script type="module" src="build/loginScreen.js"></script>
     <script type = "module" src="./build/checkboxes.js"></script>
     <script type = "module" src="./build/searcher.js"></script>
     <script type = "module" src="./build/movies.js"></script>
