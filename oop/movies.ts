@@ -1,22 +1,20 @@
-import { MediaUi } from "./mediaUi/mediaUi.js";
-import Series from './series.js';
+import { MediaUi, newUser } from "./mediaUi/mediaUi.js";
+
 let genres:Object;
 
-let arr = ['Thriller', 'Adventure']
 let currentOption = 'movies'; 
 
-  // Resto del código de Movies...
-  export default class Movies {
-    static getMovies(): any {
-      fetch('https://api.themoviedb.org/3/movie/popular?api_key=f01475a6fe591a8726e11259c3a2e0b0&language=en-US&page=1')
+export default class Movies {
+
+    static getMovies():any{
+        const media = document.querySelector('.media') as HTMLElement
+        media.innerHTML = ''
+        fetch('https://api.themoviedb.org/3/movie/popular?api_key=f01475a6fe591a8726e11259c3a2e0b0&language=en-US&page=1')
         .then(response => response.json())
         .then(data => {
-          MediaUi.clearMedia();
-          // Mostrar las películas solo si la opción actual es películas
-          if (currentOption === 'movies') {
             MediaUi.displayMedia(data.results, 'movies', 'movies');
-          }
         })
+        /* .then(data => console.log(data, 'estas son las películas')); */
     }
 
     static getGenre():any{
@@ -30,7 +28,8 @@ let currentOption = 'movies';
 
     static async getMovieByGenre(likes:String[]) {
         let id = ''
-        
+        const media = document.querySelector('.media') as HTMLElement
+        media.innerHTML = ''
         for(const genre in genres) {
             if(likes.includes(genres[genre].name  )) {
                 id = genres[genre].id;
@@ -81,7 +80,7 @@ let currentOption = 'movies';
     
 
 }
-console.log("probando1",Movies.getMovies())
+
 Movies.getGenre()
 
 function switchToMovies() {
@@ -96,5 +95,11 @@ if (moviesButton){
 }
   
 setTimeout(() => {
-    Movies.getMovieByGenre(arr)
-},2000)
+    //displaying genres in base of the user likes
+    if (newUser.selectedGenres.length > 0) {
+        Movies.getMovieByGenre(newUser.selectedGenres)
+    } else {
+        //show it by default
+        Movies.getMovies()
+    }
+}, 2000)

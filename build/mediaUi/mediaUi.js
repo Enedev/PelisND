@@ -44,20 +44,31 @@ class MediaUi {
         media.innerHTML = '';
     }
 }
-const currentUser = MediaUi.getCurrentUser();
-const newUser = new User(currentUser.id, currentUser.name);
-// Obtener todos los elementos del checkbox de género
-const genreCheckboxes = Array.from(document.querySelectorAll('.genre-checkbox'));
-// Agregar evento a los checkboxes
-for (const checkbox of genreCheckboxes) {
-    checkbox.addEventListener('change', () => {
-        var _a, _b;
-        const genre = (_b = (_a = checkbox.nextElementSibling) === null || _a === void 0 ? void 0 : _a.textContent) === null || _b === void 0 ? void 0 : _b.trim();
-        console.log('Genre:', genre);
-        if (genre) {
-            newUser.setGenre(genre);
+let newUser;
+window.addEventListener('DOMContentLoaded', () => {
+    var _a, _b;
+    //Creating new user
+    const currentUser = MediaUi.getCurrentUser();
+    newUser = new User(currentUser.id, currentUser.name);
+    //Set past selectedGenres
+    newUser.selectedGenres = currentUser.selectedGenres;
+    console.log(newUser);
+    // Obtener todos los elementos del checkbox de género
+    const genreCheckboxes = Array.from(document.querySelectorAll('.genre-checkbox'));
+    // Agregar evento a los checkboxes
+    for (const checkbox of genreCheckboxes) {
+        //check them if user already has
+        if (newUser.selectedGenres.includes((_b = (_a = checkbox.nextElementSibling) === null || _a === void 0 ? void 0 : _a.textContent) === null || _b === void 0 ? void 0 : _b.trim())) {
+            checkbox.checked = true;
         }
-    });
-}
-MediaUi.getCurrentUser();
-export { MediaUi };
+        checkbox.addEventListener('change', () => {
+            var _a, _b;
+            const genre = (_b = (_a = checkbox.nextElementSibling) === null || _a === void 0 ? void 0 : _a.textContent) === null || _b === void 0 ? void 0 : _b.trim();
+            console.log('Genre:', genre);
+            if (genre) {
+                newUser.setGenre(genre);
+            }
+        });
+    }
+});
+export { MediaUi, newUser };

@@ -7,22 +7,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { MediaUi } from "./mediaUi/mediaUi.js";
+import { MediaUi, newUser } from "./mediaUi/mediaUi.js";
 let genres;
-let arr = ['Thriller', 'Adventure'];
 let currentOption = 'movies';
-// Resto del código de Movies...
 export default class Movies {
     static getMovies() {
+        const media = document.querySelector('.media');
+        media.innerHTML = '';
         fetch('https://api.themoviedb.org/3/movie/popular?api_key=f01475a6fe591a8726e11259c3a2e0b0&language=en-US&page=1')
             .then(response => response.json())
             .then(data => {
-            MediaUi.clearMedia();
-            // Mostrar las películas solo si la opción actual es películas
-            if (currentOption === 'movies') {
-                MediaUi.displayMedia(data.results, 'movies', 'movies');
-            }
+            MediaUi.displayMedia(data.results, 'movies', 'movies');
         });
+        /* .then(data => console.log(data, 'estas son las películas')); */
     }
     static getGenre() {
         fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=f01475a6fe591a8726e11259c3a2e0b0&language=en-US')
@@ -35,6 +32,8 @@ export default class Movies {
     static getMovieByGenre(likes) {
         return __awaiter(this, void 0, void 0, function* () {
             let id = '';
+            const media = document.querySelector('.media');
+            media.innerHTML = '';
             for (const genre in genres) {
                 if (likes.includes(genres[genre].name)) {
                     id = genres[genre].id;
@@ -78,7 +77,6 @@ export default class Movies {
         });
     }
 }
-console.log("probando1", Movies.getMovies());
 Movies.getGenre();
 function switchToMovies() {
     currentOption = 'movies';
@@ -89,5 +87,12 @@ if (moviesButton) {
     moviesButton.addEventListener('click', switchToMovies);
 }
 setTimeout(() => {
-    Movies.getMovieByGenre(arr);
+    //displaying genres in base of the user likes
+    if (newUser.selectedGenres.length > 0) {
+        Movies.getMovieByGenre(newUser.selectedGenres);
+    }
+    else {
+        //show it by default
+        Movies.getMovies();
+    }
 }, 2000);

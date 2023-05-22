@@ -1,3 +1,4 @@
+import Movies from "../movies.js";
 import { User } from "../user.js";
 
 const userName = document.querySelector('.userName') as HTMLElement
@@ -56,25 +57,37 @@ class MediaUi {
     }
 }
 
-const currentUser = MediaUi.getCurrentUser();
+let newUser:User
 
-const newUser = new User(currentUser.id, currentUser.name)
-// Obtener todos los elementos del checkbox de género
-const genreCheckboxes = Array.from(document.querySelectorAll('.genre-checkbox'));
-
-// Agregar evento a los checkboxes
-for (const checkbox of genreCheckboxes) {
-    checkbox.addEventListener('change', () => {
-        const genre = checkbox.nextElementSibling?.textContent?.trim();
-        console.log('Genre:', genre);
-        if(genre) {
-            newUser.setGenre(genre);
+window.addEventListener('DOMContentLoaded', () => {
+    //Creating new user
+    const currentUser = MediaUi.getCurrentUser();
+    newUser = new User(currentUser.id, currentUser.name)
+    
+    //Set past selectedGenres
+    newUser.selectedGenres = currentUser.selectedGenres
+    console.log(newUser);
+    
+    // Obtener todos los elementos del checkbox de género
+    const genreCheckboxes = Array.from(document.querySelectorAll('.genre-checkbox'));
+    
+    // Agregar evento a los checkboxes
+    for (const checkbox of genreCheckboxes) {
+        //check them if user already has
+        if(newUser.selectedGenres.includes(checkbox.nextElementSibling?.textContent?.trim())) {
+            checkbox.checked = true
         }
-    });
-}
-
-MediaUi.getCurrentUser()
+        checkbox.addEventListener('change', () => {
+            const genre = checkbox.nextElementSibling?.textContent?.trim();
+            console.log('Genre:', genre);
+            if(genre) {
+                newUser.setGenre(genre);
+            }
+        });
+    }
+})
 
 export {
-    MediaUi
+    MediaUi,
+    newUser
 }
