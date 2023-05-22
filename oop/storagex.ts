@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export default class StorageX {
 
     static addUserStorage(userArray: object[]) {
@@ -8,6 +10,27 @@ export default class StorageX {
     static addCurrentUser(user:Object) {
         let storage = localStorage.setItem('currentUser', JSON.stringify(user))
         return storage
+    }
+
+    static updateGenreLikes(userObject:User, likes:String[]) {
+        
+        console.log('Function invoked')
+        // Retrieve the user data from local storage
+        const storedData = localStorage.getItem("name");
+        const users = storedData ? JSON.parse(storedData) : [];
+
+        // Find the user by their unique identifier
+        console.log('this are the users', users);
+        
+        //Iterate through each user and find the the user by id
+        for(const user in users) {
+            if(users[user].id === userObject.id) {
+                users[user].selectedGenres = likes
+            }
+        }
+    
+        // Save the updated user data back to local storage
+        localStorage.setItem("name", JSON.stringify(users));
     }
 
     static getStorage(): any {

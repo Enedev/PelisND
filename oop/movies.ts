@@ -1,14 +1,19 @@
 import { MediaUi } from "./mediaUi/mediaUi.js";
+import { newUser } from "./mediaUi/mediaUi.js";
 
 let genres:Object;
 
-let arr = ['Thriller', 'Adventure']
 
 export default class Movies {
 
     static getMovies():any{
+        const media = document.querySelector('.media') as HTMLElement
+        media.innerHTML = ''
         fetch('https://api.themoviedb.org/3/movie/popular?api_key=f01475a6fe591a8726e11259c3a2e0b0&language=en-US&page=1')
         .then(response => response.json())
+        .then(data => {
+            MediaUi.displayMedia(data.results);
+        })
         /* .then(data => console.log(data, 'estas son las películas')); */
     }
 
@@ -23,7 +28,8 @@ export default class Movies {
 
     static async getMovieByGenre(likes:String[]) {
         let id = ''
-        
+        const media = document.querySelector('.media') as HTMLElement
+        media.innerHTML = ''
         for(const genre in genres) {
             if(likes.includes(genres[genre].name  )) {
                 id = genres[genre].id;
@@ -69,9 +75,16 @@ export default class Movies {
     }
 
 }
-Movies.getMovies()
+
+//This will give us the genres we want to get
 Movies.getGenre()
 
 setTimeout(() => {
-    Movies.getMovieByGenre(arr)
-},2000)
+    //displaying genres in base of the user likes
+    if (newUser.selectedGenres.length > 0) {
+        Movies.getMovieByGenre(newUser.selectedGenres)
+    } else {
+        //show it by default
+        Movies.getMovies()
+    }
+}, 2000)
