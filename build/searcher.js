@@ -1,13 +1,17 @@
 import Movies from "./movies.js";
+import Series from "./series.js";
 const searchButton = document.getElementById('searchButton');
 const searchContainer = document.getElementById('searchContainer');
 const searchSubmit = document.getElementById('searchSubmit');
 const searchInput = document.getElementById('searchInput');
+const allCheckboxes = document.getElementById('allCheckboxes');
+let currentOption = 'movies'; // Opción actual inicializada como 'movies'
 //shows the searchbar
 searchButton.addEventListener('click', () => {
     searchContainer.style.display = 'block';
     searchButton.style.display = 'none';
     searchInput.value = '';
+    allCheckboxes.style.position = 'relative';
 });
 //Tells me what the user is typing
 /* searchBar.addEventListener('input', (e) => {
@@ -17,11 +21,35 @@ searchButton.addEventListener('click', () => {
 searchSubmit.addEventListener('click', () => {
     if (searchInput.value.length > 0) {
         const actorName = searchInput.value;
-        Movies.getMoviesByActorName(actorName.trim());
+        if (currentOption === 'movies') {
+            Movies.getMoviesByActorName(actorName.trim());
+        }
+        else if (currentOption === 'series') {
+            Series.getSeriesByActorName(actorName.trim());
+        }
         searchInput.value = '';
     }
     else {
         searchContainer.style.display = 'none';
         searchButton.style.display = 'block';
+        allCheckboxes.style.position = 'absolute';
     }
 });
+// Cambia la opción actual a 'movies'
+function switchToMovies() {
+    Movies.getMovies();
+    currentOption = 'movies';
+}
+// Cambia la opción actual a 'series'
+function switchToSeries() {
+    Series.getSeries();
+    currentOption = 'series';
+}
+const moviesButton = document.getElementById('moviesButton');
+if (moviesButton) {
+    moviesButton.addEventListener('click', switchToMovies);
+}
+const seriesButton = document.getElementById('seriesButton');
+if (seriesButton) {
+    seriesButton.addEventListener('click', switchToSeries);
+}

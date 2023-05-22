@@ -10,11 +10,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { MediaUi } from "./mediaUi/mediaUi.js";
 let genres;
 let arr = ['Thriller', 'Adventure'];
+let currentOption = 'movies';
+// Resto del código de Movies...
 export default class Movies {
     static getMovies() {
         fetch('https://api.themoviedb.org/3/movie/popular?api_key=f01475a6fe591a8726e11259c3a2e0b0&language=en-US&page=1')
-            .then(response => response.json());
-        /* .then(data => console.log(data, 'estas son las películas')); */
+            .then(response => response.json())
+            .then(data => {
+            MediaUi.clearMedia();
+            // Mostrar las películas solo si la opción actual es películas
+            if (currentOption === 'movies') {
+                MediaUi.displayMedia(data.results, 'movies', 'movies');
+            }
+        });
     }
     static getGenre() {
         fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=f01475a6fe591a8726e11259c3a2e0b0&language=en-US')
@@ -34,7 +42,7 @@ export default class Movies {
                         const response = yield fetch(`https://api.themoviedb.org/3/discover/movie?api_key=f01475a6fe591a8726e11259c3a2e0b0&language=en-US&page=1&with_genres=${id}`);
                         const data = yield response.json();
                         console.log(data.results, `Data for the ${genres[genre].name} genre`);
-                        MediaUi.displayMedia(data.results);
+                        MediaUi.displayMedia(data.results, 'movies', 'movies');
                     }
                     catch (error) {
                         throw new Error(`Error: ${error}`);
@@ -49,10 +57,12 @@ export default class Movies {
             .then(data => {
             const media = document.querySelector('.media');
             media.innerHTML = '';
-            const movies = data.results;
-            console.log(movies[0]);
-            //Showinf actor movies
-            MediaUi.displayMedia(movies[0].known_for);
+            const actor = data.results[0];
+            if (actor) {
+                const movies = actor.known_for.filter((item) => item.media_type === 'movie');
+                MediaUi.clearMedia();
+                MediaUi.displayMedia(movies, 'movies', 'movies');
+            }
         });
     }
     static getMoviesByReleaseData(start_date, end_date) {
@@ -64,12 +74,20 @@ export default class Movies {
             const yearMovies = data.results;
             console.log(yearMovies[0]);
             //Showin' data yearMovies
-            MediaUi.displayMedia(yearMovies);
+            MediaUi.displayMedia(yearMovies, "movies", 'movies');
         });
     }
 }
-Movies.getMovies();
+console.log("probando1", Movies.getMovies());
 Movies.getGenre();
+function switchToMovies() {
+    currentOption = 'movies';
+    Movies.getMovies();
+}
+const moviesButton = document.getElementById('moviesButton');
+if (moviesButton) {
+    moviesButton.addEventListener('click', switchToMovies);
+}
 setTimeout(() => {
     Movies.getMovieByGenre(arr);
 }, 2000);

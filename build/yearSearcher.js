@@ -1,9 +1,11 @@
 import Movies from "./movies.js";
+import Series from "./series.js";
 const yearButton = document.getElementById('yearButton');
 const yearSearchContainer = document.getElementById('yearSearchContainer');
 const yearSearchSubmit = document.getElementById('yearSearchSubmit');
 const yearSearchInput = document.getElementById('yearSearchInput');
 const allCheckboxes = document.getElementById('allCheckboxes');
+let currentOption = 'movies'; // Opción actual inicializada como 'movies'
 //shows the searchbar
 yearButton.addEventListener('click', () => {
     yearSearchContainer.style.display = 'block';
@@ -21,7 +23,12 @@ yearSearchSubmit.addEventListener('click', () => {
         const release_year = yearSearchInput.value.trim();
         const firstDayOfYear = `${release_year}-01-01`;
         const lastDayOfYear = `${release_year}-12-31`;
-        Movies.getMoviesByReleaseData(firstDayOfYear, lastDayOfYear);
+        if (currentOption === 'movies') {
+            Movies.getMoviesByReleaseData(firstDayOfYear, lastDayOfYear);
+        }
+        else if (currentOption === 'series') {
+            Series.getSeriesByReleaseData(firstDayOfYear, lastDayOfYear);
+        }
         yearSearchInput.value = '';
     }
     else {
@@ -30,3 +37,21 @@ yearSearchSubmit.addEventListener('click', () => {
         allCheckboxes.style.position = 'absolute';
     }
 });
+// Cambia la opción actual a 'movies'
+function switchToMovies() {
+    Movies.getMovies();
+    currentOption = 'movies';
+}
+// Cambia la opción actual a 'series'
+function switchToSeries() {
+    Series.getSeries();
+    currentOption = 'series';
+}
+const moviesButton = document.getElementById('moviesButton');
+if (moviesButton) {
+    moviesButton.addEventListener('click', switchToMovies);
+}
+const seriesButton = document.getElementById('seriesButton');
+if (seriesButton) {
+    seriesButton.addEventListener('click', switchToSeries);
+}

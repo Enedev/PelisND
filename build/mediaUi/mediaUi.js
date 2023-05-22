@@ -14,19 +14,34 @@ class MediaUi {
         userName.innerHTML = currentUser.name;
         return currentUser.name ? currentUser : undefined;
     }
-    static displayMedia(movies) {
+    static displayMedia(content, contentType, currentOption) {
         const media = document.querySelector('.media');
-        for (const movie in movies) {
-            let moviesContainer = document.createElement('div');
-            moviesContainer.innerHTML = `
-                <div class = "mediaWatch">
-                    <img src='https://image.tmdb.org/t/p/w500${movies[movie].backdrop_path}'></img>
-                    <span>${movies[movie].title}</span>
-                    <span>Release data: ${movies[movie].release_date}</span>
-                </div>
-            `;
-            media.appendChild(moviesContainer);
+        media.innerHTML = '';
+        for (const item of content) {
+            let itemContainer = document.createElement('div');
+            let title = '';
+            let releaseDate = '';
+            if (contentType === 'movies' && currentOption === 'movies') {
+                title = item.title;
+                releaseDate = item.release_date;
+            }
+            else if (contentType === 'series' && currentOption === 'series') {
+                title = item.name;
+                releaseDate = item.first_air_date;
+            }
+            itemContainer.innerHTML = `
+            <div class="mediaWatch">
+                <img src='https://image.tmdb.org/t/p/w500${item.backdrop_path}'></img>
+                <span>${title}</span>
+                <span>Release date: ${releaseDate}</span>
+            </div>
+          `;
+            media.appendChild(itemContainer);
         }
+    }
+    static clearMedia() {
+        const media = document.querySelector('.media');
+        media.innerHTML = '';
     }
 }
 const currentUser = MediaUi.getCurrentUser();
