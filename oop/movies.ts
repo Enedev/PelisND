@@ -4,7 +4,7 @@ let genres:Object;
 
 let arr = ['Thriller', 'Adventure']
 
-export default class Movies{
+export default class Movies {
 
     static getMovies():any{
         fetch('https://api.themoviedb.org/3/movie/popular?api_key=f01475a6fe591a8726e11259c3a2e0b0&language=en-US&page=1')
