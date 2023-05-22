@@ -42,13 +42,6 @@ export default class Movies{
 }
 Movies.getMovies()
 Movies.getGenre()
-<<<<<<< HEAD
-=======
-
-setTimeout(() => {
-    Movies.getMovieByGenre(arr)
-},2000)
->>>>>>> 0be215f5da811575b29c9c15615093a8b534287e
 
 setTimeout(() => {
     Movies.getMovieByGenre(arr)

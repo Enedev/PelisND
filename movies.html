@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/mediaScreen.css">
     <link rel="stylesheet" href="CSS/checkboxes.css">
+    <link rel="stylesheet" href="CSS/searcher.css">
 
     <title>Document</title>
 </head>
@@ -17,8 +18,8 @@
             <button>Tipos</button>
             <button class="diffButton" id="searchButton">Actores</button>
             <div id="searchContainer" style="display: none;">
-              <input type="text" id="searchInput" placeholder="Ingrese su búsqueda">
-              <button id="searchSubmit">Buscar</button>
+              <input type="text" id="searchInput" placeholder="Actor Name">
+              <button id="searchSubmit"><img src="./img/search.png"></button></button>
             </div>
         </div>
         <div class="checkbox-wrapper-24">
@@ -61,10 +62,9 @@
         <div class = "media">
 
         </div>
-      </main>
-    
+    </main>
+    <script type = "module" src="./build/checkboxes.js"></script>
     <script type = "module" src="./build/searcher.js"></script>
-
     <script type = "module" src="./build/movies.js"></script>
     <script type = "module" src="./build/series.js"></script>
     <script type="module" src="./build/mediaUi/mediaUi.js"></script>
