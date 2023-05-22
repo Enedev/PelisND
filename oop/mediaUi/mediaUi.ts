@@ -40,15 +40,13 @@ const currentUser = MediaUi.getCurrentUser();
 const newUser = new User(currentUser.id, currentUser.name)
 // Obtener todos los elementos del checkbox de género
 const genreCheckboxes = Array.from(document.querySelectorAll('.genre-checkbox'));
-console.log(genreCheckboxes)
 
 // Agregar evento a los checkboxes
 for (const checkbox of genreCheckboxes) {
     checkbox.addEventListener('change', () => {
         const genre = checkbox.nextElementSibling?.textContent?.trim();
         console.log('Genre:', genre);
-        
-        if (genre && currentUser && (checkbox as HTMLInputElement).checked) {
+        if(genre) {
             newUser.setGenre(genre);
         }
     });

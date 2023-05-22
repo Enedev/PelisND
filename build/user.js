@@ -16,8 +16,14 @@ export class User {
         this.selectedGenres = [];
     }
     setGenre(genre) {
-        if (this.selectedGenres) {
+        //if the selectedGenres doesn't includes genre
+        if (!this.selectedGenres.includes(genre)) {
             this.selectedGenres.push(genre);
+        }
+        else {
+            const index = this.selectedGenres.indexOf(genre);
+            this.selectedGenres.splice(index, 1);
+            console.warn('Género eliminado');
         }
         console.log("Estos son los generos del Usuario", this.selectedGenres);
     }

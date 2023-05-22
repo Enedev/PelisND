@@ -72,7 +72,7 @@ export class LoginUi {
                 //Adding selected user
                 StorageX.addCurrentUser(selectedUser)
                 // Redirect to another HTML file
-                window.location.href = 'http://127.0.0.1:5500/movies.html'
+                window.location.href = 'http://127.0.0.1:5500/PelisND/movies.html'
             })
         })
     }
