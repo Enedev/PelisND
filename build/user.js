@@ -1,3 +1,4 @@
+// user.ts
 import { LoginUi } from "./loginUi.js";
 import Movies from "./movies.js";
 import StorageX from "./storagex.js";
@@ -15,9 +16,9 @@ export class User {
         this.id = id;
         this.name = name;
         this.selectedGenres = [];
+        this.likes = [];
     }
     setGenre(genre) {
-        //if the selectedGenres doesn't includes genre
         if (!this.selectedGenres.includes(genre)) {
             this.selectedGenres.push(genre);
         }
@@ -33,6 +34,19 @@ export class User {
         else {
             Movies.getMovies();
         }
-        console.log("Estos son los generos del Usuario", this.selectedGenres.length);
+        console.log("Estos son los géneros del Usuario", this.selectedGenres.length);
+    }
+    setLike(like) {
+        if (!this.likes.includes(like)) {
+            this.likes.push(like);
+        }
+        else {
+            const index = this.likes.indexOf(like);
+            this.likes.splice(index, 1);
+            console.warn('Like eliminado');
+        }
+        StorageX.updateUserLikes(this, this.likes);
+        Movies.getMovies();
+        console.log("Estos son los likes del Usuario", this.likes.length);
     }
 }

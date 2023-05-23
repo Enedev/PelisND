@@ -1,12 +1,13 @@
 h1 {
     position: absolute;
+    top: 200px;
     color: #ffffff;
     font-family: Tangerine, sans-serif;
     font-size: 55px;
     transform: translate(-50%, -50%);
     animation: 
-        morph-effect 10s 
-        infinite ease-in-out;
+    morph-effect 10s 
+    infinite ease-in-out;
 }
 
 h1:nth-child(1) {
